@@ -1,0 +1,22 @@
+﻿<Window x:Class="WellNet.ProcessRunner.Server.WpfUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WellNet.ProcessRunner.Server.WpfUi"
+        mc:Ignorable="d"
+        Title="ProcessRunner Server UI" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="BtnStart" Content="Start" Padding="6" Margin="6"/>
+            <Button Name="BtnStop" Content="Stop" Padding="6" Margin="6"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <TextBlock Name="TbStatus" TextWrapping="Wrap"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

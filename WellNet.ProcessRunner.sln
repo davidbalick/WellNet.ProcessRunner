@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.ProcessRunner", "WellNet.ProcessRunner.csproj", "{E92A8820-E8AB-4CB3-92ED-3552F558160F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.ProcessRunner.Service", "WellNet.ProcessRunner.Service\WellNet.ProcessRunner.Service.csproj", "{6E758F81-9106-40D1-9671-EA30ED6FA17A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.ProcessRunner.Server.WpfUi", "WellNet.ProcessRunner.Server.WpfUi\WellNet.ProcessRunner.Server.WpfUi.csproj", "{0C568BA5-4B68-4680-A34E-5A2DBEE3E5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.Sql", "..\WellNet.Sql\WellNet.Sql.csproj", "{D83A481B-CC6C-44FA-B395-147B0E9D9F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.Utils", "..\WellNet.Utils\WellNet.Utils.csproj", "{6778AB4F-A69C-4098-8B20-71D41E289A47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{0C94FA76-5285-42D0-9AB0-CF648E0DDEC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellNet.Ftp", "..\WellNet.Ftp\WellNet.Ftp.csproj", "{014089D7-727A-4C2D-AA4A-DF72B397C8D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E92A8820-E8AB-4CB3-92ED-3552F558160F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92A8820-E8AB-4CB3-92ED-3552F558160F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92A8820-E8AB-4CB3-92ED-3552F558160F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92A8820-E8AB-4CB3-92ED-3552F558160F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E758F81-9106-40D1-9671-EA30ED6FA17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E758F81-9106-40D1-9671-EA30ED6FA17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E758F81-9106-40D1-9671-EA30ED6FA17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E758F81-9106-40D1-9671-EA30ED6FA17A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C568BA5-4B68-4680-A34E-5A2DBEE3E5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C568BA5-4B68-4680-A34E-5A2DBEE3E5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C568BA5-4B68-4680-A34E-5A2DBEE3E5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C568BA5-4B68-4680-A34E-5A2DBEE3E5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83A481B-CC6C-44FA-B395-147B0E9D9F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83A481B-CC6C-44FA-B395-147B0E9D9F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83A481B-CC6C-44FA-B395-147B0E9D9F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83A481B-CC6C-44FA-B395-147B0E9D9F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6778AB4F-A69C-4098-8B20-71D41E289A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6778AB4F-A69C-4098-8B20-71D41E289A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6778AB4F-A69C-4098-8B20-71D41E289A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6778AB4F-A69C-4098-8B20-71D41E289A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C94FA76-5285-42D0-9AB0-CF648E0DDEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C94FA76-5285-42D0-9AB0-CF648E0DDEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C94FA76-5285-42D0-9AB0-CF648E0DDEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C94FA76-5285-42D0-9AB0-CF648E0DDEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{014089D7-727A-4C2D-AA4A-DF72B397C8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014089D7-727A-4C2D-AA4A-DF72B397C8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014089D7-727A-4C2D-AA4A-DF72B397C8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014089D7-727A-4C2D-AA4A-DF72B397C8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
