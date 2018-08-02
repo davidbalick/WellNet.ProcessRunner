@@ -59,7 +59,13 @@ namespace WellNet.ProcessRunner
             var dc = new ProcessRunnerDcDataContext();
             var vendor = dc.Vendors.Single(v => v.Id == vendorId);
             var archivePath = dc.NameValuePairs.Single(nv => nv.Name.Equals("TransmissionArchive")).Value;
-            var archiveFilename = Path.Combine(archivePath, direction.ToString(), vendor.ArchiveLocation, Path.GetFileName(localFile));
+            var path = Path.Combine(archivePath, direction.ToString(), vendor.ArchiveLocation);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            path = Path.Combine(path, DateTime.Now.Year.ToString());
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            var archiveFilename = Path.Combine(path, Path.GetFileName(localFile));
             if (File.Exists(archiveFilename))
                 UiLibrary.AppendGuidToFilename(archiveFilename);
             File.Copy(localFile, archiveFilename);
