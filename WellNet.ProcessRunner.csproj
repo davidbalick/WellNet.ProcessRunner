@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="FunctionBase.cs" />
+    <Compile Include="Function_Archive.cs" />
+    <Compile Include="Function_DeleteFile.cs" />
     <Compile Include="Function_ExecuteStoredProc.cs" />
-    <Compile Include="Function_SftpOutboundAndArchive.cs" />
+    <Compile Include="Function_SftpOutbound.cs" />
     <Compile Include="Function_StoredProcToFile.cs" />
     <Compile Include="IFunction.cs" />
     <Compile Include="FluentSchedulerJob.cs" />

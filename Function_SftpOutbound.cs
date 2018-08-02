@@ -5,24 +5,22 @@ using WellNet.Ftp;
 
 namespace WellNet.ProcessRunner
 {
-    public class Function_SftpOutboundAndArchive : FunctionBase<FluentSchedulerJob>, IFunction
+    public class Function_SftpOutbound : FunctionBase<FluentSchedulerJob>, IFunction
     {
-        public Function_SftpOutboundAndArchive(FluentSchedulerJob fluentSchedulerJob, int setupJobFunctionId) : base(fluentSchedulerJob, setupJobFunctionId)
+        public Function_SftpOutbound(FluentSchedulerJob fluentSchedulerJob, int setupJobFunctionId) : base(fluentSchedulerJob, setupJobFunctionId)
         {
         }
 
         public void Execute()
         {
             var folder = _parameters.ContainsKey("RemoteFolder") ? _parameters["RemoteFolder"] : "/";
-            var localFile = _fluentSchedulerJob.PropertyBag[FluentSchedulerJob.PropertyBagKey.Filename].ToString();
+            var localFile = CallingJob.PropertyBag[JobPropertyBagKey.Filename].ToString();
 
             var remoteFile = Path.Combine(folder, Path.GetFileName(localFile)).Replace("/",@"\");
             int numRetrys = 3;
 
             var vendorId = Convert.ToInt32(_parameters["Vendor"]);
             var transmissionSite = (new ProcessRunnerDcDataContext()).TransmissionSites.Single(ts => ts.VendorId == vendorId);
-
-            var archiveFilename = StaticResources.ArchiveFile(vendorId, SftpDirection.Outbound, localFile);
 
             var sftpProg = new SshNetSftp();
             ProcessRunnerException pre = null;
@@ -41,7 +39,11 @@ namespace WellNet.ProcessRunner
                     );
             } catch (Exception ex)
             {
-                StaticResources.MarkFileAsFailed(archiveFilename);
+                if (CallingJob.PropertyBag.ContainsKey(JobPropertyBagKey.ArchivedFilename))
+                {
+                    var archiveFile = CallingJob.PropertyBag[JobPropertyBagKey.ArchivedFilename].ToString();
+                    StaticResources.MarkFileAsFailed(archiveFile);
+                }
                 pre = new ProcessRunnerException(Context, ex.Message);
             }
             File.Delete(localFile);

@@ -11,18 +11,8 @@ namespace WellNet.ProcessRunner
 {
     public static class StaticResources
     {
-        public enum Severity
-        {
-            Fatal = 0,
-            Documentation = 1,
-            UserInterfaceProgress = 2
-        }
-        public enum KindStatus
-        {
-            Working = 1,
-            Completed = 2,
-            Failed = 3
-        }
+        #region Enums
+        #endregion Enums
 
         public static int GetPollWaitMilliseconds()
         {
@@ -37,7 +27,7 @@ namespace WellNet.ProcessRunner
                 .Value;
         }
 
-        public static void LogMessage(int? eventJobId, Severity severity, string context, string message, BackgroundWorker bgWorker)
+        public static void LogMessage(int? eventJobId, EventMessageSeverity severity, string context, string message, BackgroundWorker bgWorker)
         {
             var dc = new ProcessRunnerDcDataContext();
             var eventMessage = new Event_Message();
@@ -54,7 +44,7 @@ namespace WellNet.ProcessRunner
                 bgWorker.ReportProgress(0, message);
         }
 
-        public static string ArchiveFile(int vendorId, SftpDirection direction, string localFile)
+        public static string ArchiveFile(int vendorId, SetupJobDirection direction, string localFile)
         {
             var dc = new ProcessRunnerDcDataContext();
             var vendor = dc.Vendors.Single(v => v.Id == vendorId);
@@ -90,8 +80,8 @@ namespace WellNet.ProcessRunner
             var result = false;
             foreach (var dataRow in statusTable.Rows.Cast<DataRow>().OrderBy(dr => dr[0]))
             {
-                var severity = (Severity)Convert.ToInt32(dataRow[0]);
-                if (!result && severity == Severity.Fatal)
+                var severity = (EventMessageSeverity)Convert.ToInt32(dataRow[0]);
+                if (!result && severity == EventMessageSeverity.Fatal)
                     result = true;
                 var context = string.Format("{0} {1}", funcContext, dataRow[1]).Trim();
                 var message = dataRow[2].ToString();
@@ -136,13 +126,13 @@ namespace WellNet.ProcessRunner
             return string.Format("{0}{1}{2}", parts[0], datePart, parts[2]);
         }
 
-        public static void UpdateEventJobStatusAndRunWhen(int eventJobId, KindStatus status)
+        public static void UpdateEventJobStatusAndRunWhen(int eventJobId, EventJobStatus status)
         {
             var dc = new ProcessRunnerDcDataContext();
             var eventJob = dc.Event_Jobs.Single(ej => ej.Id == eventJobId);
-            eventJob.Kind_StatusId = (int)status;
+            eventJob.Status = (int)status;
             dc.SubmitChanges();
-            if (status == KindStatus.Working)
+            if (status == EventJobStatus.Working)
                 dc.UpdateEventJobRunWhen(eventJobId);
         }
     }

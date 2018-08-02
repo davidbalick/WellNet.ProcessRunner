@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProcessRunner" Class="ProcessRunnerDcDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=desktop-knjja67;Initial Catalog=ProcessRunner;Integrated Security=True" SettingsObjectName="WellNet.ProcessRunner.Properties.Settings" SettingsPropertyName="ProcessRunnerConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Event_Job" Member="Event_Jobs">
-    <Type Name="Event_Job">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Setup_JobId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RequestedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="RequestedWhen" AutoSync="Never" Type="System.DateTime" DbType="DateTime NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RunWhen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Kind_StatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Setup_Parameter" Member="Setup_Parameters">
     <Type Name="Setup_Parameter">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -35,19 +25,6 @@
     <Type Name="Kind_Parameter">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kind_Status" Member="Kind_Status">
-    <Type Name="Kind_Status">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.NameValuePair" Member="NameValuePairs">
-    <Type Name="NameValuePair">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Value" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters">
@@ -87,14 +64,6 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Setup_Job" Member="Setup_Jobs">
-    <Type Name="Setup_Job">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IsRetired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Setup_JobFunction" Member="Setup_JobFunctions">
     <Type Name="Setup_JobFunction">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -102,6 +71,33 @@
       <Column Name="Kind_FunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Sequence" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NameValuePair" Member="NameValuePairs">
+    <Type Name="NameValuePair">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Kind" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Event_Job" Member="Event_Jobs">
+    <Type Name="Event_Job">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Setup_JobId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RequestedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestedWhen" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RunWhen" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Setup_Job" Member="Setup_Jobs">
+    <Type Name="Setup_Job">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsRetired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Direction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.UpdateEventJobRunWhen" Method="UpdateEventJobRunWhen">

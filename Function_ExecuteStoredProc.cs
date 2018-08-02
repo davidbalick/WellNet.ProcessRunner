@@ -15,7 +15,7 @@ namespace WellNet.ProcessRunner
             var sqlHelper = SqlHelper.Create(connMgr[_parameters["SqlConnection"]]);
             var cmd = sqlHelper.CreateStoredProcCommand(_parameters["StoredProcedure"], false);
             var dataSet = sqlHelper.PopulateDataSet(cmd);
-            StaticResources.ProcessStatusTable0AndReportIfFatal(_fluentSchedulerJob.EventJobId, Context, dataSet.Tables[0], _fluentSchedulerJob.BgWorker);
+            StaticResources.ProcessStatusTable0AndReportIfFatal(CallingJob.EventJobId, Context, dataSet.Tables[0], CallingJob.BgWorker);
 
             //todo: handle params for the sp
         }

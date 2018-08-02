@@ -9,16 +9,26 @@ namespace WellNet.ProcessRunner
 {
     public class FluentSchedulerJob : IJob
     {
-        public enum PropertyBagKey
+        private SetupJobDirection _jobDirection;
+        public SetupJobDirection JobDirection
         {
-            Filename
-        };
+            get
+            {
+                if (_jobDirection != SetupJobDirection.Unknown)
+                    return _jobDirection;
+                _jobDirection = 
+                    (SetupJobDirection) Convert.ToInt32(
+                    (new ProcessRunnerDcDataContext()).Setup_Jobs.Single(sj => sj.Id == SetupJobId).Direction);
+                return _jobDirection;
+            }
+        }
+
 
         public readonly int EventJobId;
         public readonly int SetupJobId;
         public readonly string JobName;
         public BackgroundWorker BgWorker;
-        public Dictionary<PropertyBagKey, object> PropertyBag { get; set; }
+        public Dictionary<JobPropertyBagKey, object> PropertyBag { get; set; }
 
         public FluentSchedulerJob(int eventJobId, BackgroundWorker bgWorker)
         {
@@ -29,14 +39,13 @@ namespace WellNet.ProcessRunner
             JobName = dc.Setup_Jobs.Single(sj => sj.Id == SetupJobId).Name;
 
             BgWorker = bgWorker;
-            PropertyBag = new Dictionary<PropertyBagKey, object>();
+            PropertyBag = new Dictionary<JobPropertyBagKey, object>();
         }
-
 
         public void Execute()
         {
             var dc = new ProcessRunnerDcDataContext();
-            var status = StaticResources.KindStatus.Working;
+            var status = EventJobStatus.Working;
             StaticResources.UpdateEventJobStatusAndRunWhen(EventJobId, status);
             foreach (var sjf in dc.Setup_JobFunctions.Where(sjf => sjf.Setup_JobId == SetupJobId && sjf.IsDisabled != true).OrderBy(sjf => sjf.Sequence))
             {
@@ -47,24 +56,24 @@ namespace WellNet.ProcessRunner
                     func.Execute();
                 } catch (Exception ex)
                 {
-                    StaticResources.UpdateEventJobStatusAndRunWhen(EventJobId, StaticResources.KindStatus.Failed);
+                    StaticResources.UpdateEventJobStatusAndRunWhen(EventJobId, EventJobStatus.Failed);
                     if (ex is ProcessRunnerException)
                         throw ex;
                     throw new ProcessRunnerException(func.Context, string.Format("Unhandled exception: {0}", ex.Message));
                 }
                 if (FatalErrorWasReported())
                 {
-                    status = StaticResources.KindStatus.Failed;
+                    status = EventJobStatus.Failed;
                     break;
                 }
             }
-            status = status == StaticResources.KindStatus.Working ? StaticResources.KindStatus.Completed : status;
+            status = status == EventJobStatus.Working ? EventJobStatus.Completed : status;
             StaticResources.UpdateEventJobStatusAndRunWhen(EventJobId, status);
         }
 
         private bool FatalErrorWasReported()
         {
-            var fatal = (int)StaticResources.Severity.Fatal;
+            var fatal = (int)EventMessageSeverity.Fatal;
             return (new ProcessRunnerDcDataContext()).Event_Messages.Any(em => em.Event_JobId == EventJobId && em.Severity == fatal);
         }
     }

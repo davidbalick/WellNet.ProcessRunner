@@ -15,7 +15,7 @@ namespace WellNet.ProcessRunner.Service
 
         protected override void OnStart(string[] args)
         {
-            StaticResources.LogMessage(null, StaticResources.Severity.Documentation, null, "Service Started", null);
+            StaticResources.LogMessage(null, EventMessageSeverity.Documentation, null, "Service Started", null);
             _serviceLoop.Start(null);
         }
 
@@ -24,7 +24,7 @@ namespace WellNet.ProcessRunner.Service
             _serviceLoop.StopRequested = true;
             while (!_serviceLoop.Stopped)
                 Thread.Sleep(5000);
-            StaticResources.LogMessage(null, StaticResources.Severity.Fatal, null, "Service Stopped", null);
+            StaticResources.LogMessage(null, EventMessageSeverity.Fatal, null, "Service Stopped", null);
             base.OnStop();
         }
     }

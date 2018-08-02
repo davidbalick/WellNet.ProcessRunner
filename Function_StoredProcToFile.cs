@@ -24,7 +24,7 @@ namespace WellNet.ProcessRunner
             var sqlHelper = SqlHelper.Create(connMgr[_parameters["SqlConnection"]]);
             var cmd = sqlHelper.CreateStoredProcCommand(_parameters["StoredProcedure"], false);
             var dataSet = sqlHelper.PopulateDataSet(cmd);
-            if (StaticResources.ProcessStatusTable0AndReportIfFatal(_fluentSchedulerJob.EventJobId, Context, dataSet.Tables[0], _fluentSchedulerJob.BgWorker))
+            if (StaticResources.ProcessStatusTable0AndReportIfFatal(CallingJob.EventJobId, Context, dataSet.Tables[0], CallingJob.BgWorker))
                 return;
             FileType fileType;
             if (!Enum.TryParse(_parameters["FileType"], out fileType))
@@ -47,7 +47,7 @@ namespace WellNet.ProcessRunner
                     fileName = Path.Combine(Path.GetDirectoryName(tempFileName), fileName);
                 File.Move(tempFileName, fileName);
             }
-            _fluentSchedulerJob.PropertyBag[FluentSchedulerJob.PropertyBagKey.Filename] = fileName;
+            CallingJob.PropertyBag[JobPropertyBagKey.Filename] = fileName;
         }
     }
 }

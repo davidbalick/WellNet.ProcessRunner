@@ -16,7 +16,7 @@ namespace WellNet.ProcessRunner
             if (bgWorker != null)
                 _bgWorker = bgWorker;
             _waitMilliseconds = StaticResources.GetPollWaitMilliseconds();
-            StaticResources.LogMessage(null, StaticResources.Severity.Documentation, null, "Service Started", _bgWorker);
+            StaticResources.LogMessage(null, EventMessageSeverity.Documentation, null, "Service Started", _bgWorker);
             while (!StopRequested)
                 try
                 {
@@ -24,11 +24,11 @@ namespace WellNet.ProcessRunner
                 } catch (Exception ex)
                 {
                     var context = (ex is ProcessRunnerException) ? ((ProcessRunnerException)ex).Context : "PerformService failed";
-                    StaticResources.LogMessage(null, StaticResources.Severity.Fatal, context, ex.Message, _bgWorker);
+                    StaticResources.LogMessage(null, EventMessageSeverity.Fatal, context, ex.Message, _bgWorker);
                     break;
                 }
             Stopped = true;
-            StaticResources.LogMessage(null, StaticResources.Severity.Fatal, null, "Service Stopped", _bgWorker);
+            StaticResources.LogMessage(null, EventMessageSeverity.Fatal, null, "Service Stopped", _bgWorker);
         }
 
         private void PerformService()

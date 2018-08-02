@@ -30,9 +30,6 @@ namespace WellNet.ProcessRunner
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertEvent_Job(Event_Job instance);
-    partial void UpdateEvent_Job(Event_Job instance);
-    partial void DeleteEvent_Job(Event_Job instance);
     partial void InsertSetup_Parameter(Setup_Parameter instance);
     partial void UpdateSetup_Parameter(Setup_Parameter instance);
     partial void DeleteSetup_Parameter(Setup_Parameter instance);
@@ -45,12 +42,6 @@ namespace WellNet.ProcessRunner
     partial void InsertKind_Parameter(Kind_Parameter instance);
     partial void UpdateKind_Parameter(Kind_Parameter instance);
     partial void DeleteKind_Parameter(Kind_Parameter instance);
-    partial void InsertKind_Status(Kind_Status instance);
-    partial void UpdateKind_Status(Kind_Status instance);
-    partial void DeleteKind_Status(Kind_Status instance);
-    partial void InsertNameValuePair(NameValuePair instance);
-    partial void UpdateNameValuePair(NameValuePair instance);
-    partial void DeleteNameValuePair(NameValuePair instance);
     partial void InsertSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
     partial void UpdateSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
     partial void DeleteSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
@@ -63,12 +54,18 @@ namespace WellNet.ProcessRunner
     partial void InsertTransmissionSite(TransmissionSite instance);
     partial void UpdateTransmissionSite(TransmissionSite instance);
     partial void DeleteTransmissionSite(TransmissionSite instance);
-    partial void InsertSetup_Job(Setup_Job instance);
-    partial void UpdateSetup_Job(Setup_Job instance);
-    partial void DeleteSetup_Job(Setup_Job instance);
     partial void InsertSetup_JobFunction(Setup_JobFunction instance);
     partial void UpdateSetup_JobFunction(Setup_JobFunction instance);
     partial void DeleteSetup_JobFunction(Setup_JobFunction instance);
+    partial void InsertNameValuePair(NameValuePair instance);
+    partial void UpdateNameValuePair(NameValuePair instance);
+    partial void DeleteNameValuePair(NameValuePair instance);
+    partial void InsertEvent_Job(Event_Job instance);
+    partial void UpdateEvent_Job(Event_Job instance);
+    partial void DeleteEvent_Job(Event_Job instance);
+    partial void InsertSetup_Job(Setup_Job instance);
+    partial void UpdateSetup_Job(Setup_Job instance);
+    partial void DeleteSetup_Job(Setup_Job instance);
     #endregion
 		
 		public ProcessRunnerDcDataContext() : 
@@ -101,14 +98,6 @@ namespace WellNet.ProcessRunner
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Event_Job> Event_Jobs
-		{
-			get
-			{
-				return this.GetTable<Event_Job>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Setup_Parameter> Setup_Parameters
 		{
 			get
@@ -138,22 +127,6 @@ namespace WellNet.ProcessRunner
 			get
 			{
 				return this.GetTable<Kind_Parameter>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Kind_Status> Kind_Status
-		{
-			get
-			{
-				return this.GetTable<Kind_Status>();
-			}
-		}
-		
-		public System.Data.Linq.Table<NameValuePair> NameValuePairs
-		{
-			get
-			{
-				return this.GetTable<NameValuePair>();
 			}
 		}
 		
@@ -189,14 +162,6 @@ namespace WellNet.ProcessRunner
 			}
 		}
 		
-		public System.Data.Linq.Table<Setup_Job> Setup_Jobs
-		{
-			get
-			{
-				return this.GetTable<Setup_Job>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Setup_JobFunction> Setup_JobFunctions
 		{
 			get
@@ -205,193 +170,35 @@ namespace WellNet.ProcessRunner
 			}
 		}
 		
+		public System.Data.Linq.Table<NameValuePair> NameValuePairs
+		{
+			get
+			{
+				return this.GetTable<NameValuePair>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Event_Job> Event_Jobs
+		{
+			get
+			{
+				return this.GetTable<Event_Job>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Setup_Job> Setup_Jobs
+		{
+			get
+			{
+				return this.GetTable<Setup_Job>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateEventJobRunWhen")]
 		public int UpdateEventJobRunWhen([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EventJobId", DbType="Int")] System.Nullable<int> eventJobId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), eventJobId);
 			return ((int)(result.ReturnValue));
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Event_Job")]
-	public partial class Event_Job : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _Setup_JobId;
-		
-		private string _RequestedBy;
-		
-		private System.DateTime _RequestedWhen;
-		
-		private System.Nullable<System.DateTime> _RunWhen;
-		
-		private System.Nullable<int> _Kind_StatusId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnSetup_JobIdChanging(int value);
-    partial void OnSetup_JobIdChanged();
-    partial void OnRequestedByChanging(string value);
-    partial void OnRequestedByChanged();
-    partial void OnRequestedWhenChanging(System.DateTime value);
-    partial void OnRequestedWhenChanged();
-    partial void OnRunWhenChanging(System.Nullable<System.DateTime> value);
-    partial void OnRunWhenChanged();
-    partial void OnKind_StatusIdChanging(System.Nullable<int> value);
-    partial void OnKind_StatusIdChanged();
-    #endregion
-		
-		public Event_Job()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Setup_JobId", DbType="Int NOT NULL")]
-		public int Setup_JobId
-		{
-			get
-			{
-				return this._Setup_JobId;
-			}
-			set
-			{
-				if ((this._Setup_JobId != value))
-				{
-					this.OnSetup_JobIdChanging(value);
-					this.SendPropertyChanging();
-					this._Setup_JobId = value;
-					this.SendPropertyChanged("Setup_JobId");
-					this.OnSetup_JobIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestedBy", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string RequestedBy
-		{
-			get
-			{
-				return this._RequestedBy;
-			}
-			set
-			{
-				if ((this._RequestedBy != value))
-				{
-					this.OnRequestedByChanging(value);
-					this.SendPropertyChanging();
-					this._RequestedBy = value;
-					this.SendPropertyChanged("RequestedBy");
-					this.OnRequestedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestedWhen", DbType="DateTime NOT NULL", IsDbGenerated=true)]
-		public System.DateTime RequestedWhen
-		{
-			get
-			{
-				return this._RequestedWhen;
-			}
-			set
-			{
-				if ((this._RequestedWhen != value))
-				{
-					this.OnRequestedWhenChanging(value);
-					this.SendPropertyChanging();
-					this._RequestedWhen = value;
-					this.SendPropertyChanged("RequestedWhen");
-					this.OnRequestedWhenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RunWhen", DbType="DateTime")]
-		public System.Nullable<System.DateTime> RunWhen
-		{
-			get
-			{
-				return this._RunWhen;
-			}
-			set
-			{
-				if ((this._RunWhen != value))
-				{
-					this.OnRunWhenChanging(value);
-					this.SendPropertyChanging();
-					this._RunWhen = value;
-					this.SendPropertyChanged("RunWhen");
-					this.OnRunWhenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind_StatusId", DbType="Int")]
-		public System.Nullable<int> Kind_StatusId
-		{
-			get
-			{
-				return this._Kind_StatusId;
-			}
-			set
-			{
-				if ((this._Kind_StatusId != value))
-				{
-					this.OnKind_StatusIdChanging(value);
-					this.SendPropertyChanging();
-					this._Kind_StatusId = value;
-					this.SendPropertyChanged("Kind_StatusId");
-					this.OnKind_StatusIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -786,202 +593,6 @@ namespace WellNet.ProcessRunner
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_Status")]
-	public partial class Kind_Status : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Kind_Status()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NameValuePair")]
-	public partial class NameValuePair : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _Value;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnValueChanging(string value);
-    partial void OnValueChanged();
-    #endregion
-		
-		public NameValuePair()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Value
-		{
-			get
-			{
-				return this._Value;
-			}
-			set
-			{
-				if ((this._Value != value))
-				{
-					this.OnValueChanging(value);
-					this.SendPropertyChanging();
-					this._Value = value;
-					this.SendPropertyChanged("Value");
-					this.OnValueChanged();
 				}
 			}
 		}
@@ -1663,140 +1274,6 @@ namespace WellNet.ProcessRunner
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Setup_Job")]
-	public partial class Setup_Job : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private System.Nullable<bool> _IsRetired;
-		
-		private System.Nullable<bool> _IsDisabled;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnIsRetiredChanging(System.Nullable<bool> value);
-    partial void OnIsRetiredChanged();
-    partial void OnIsDisabledChanging(System.Nullable<bool> value);
-    partial void OnIsDisabledChanged();
-    #endregion
-		
-		public Setup_Job()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRetired", DbType="Bit")]
-		public System.Nullable<bool> IsRetired
-		{
-			get
-			{
-				return this._IsRetired;
-			}
-			set
-			{
-				if ((this._IsRetired != value))
-				{
-					this.OnIsRetiredChanging(value);
-					this.SendPropertyChanging();
-					this._IsRetired = value;
-					this.SendPropertyChanged("IsRetired");
-					this.OnIsRetiredChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDisabled", DbType="Bit")]
-		public System.Nullable<bool> IsDisabled
-		{
-			get
-			{
-				return this._IsDisabled;
-			}
-			set
-			{
-				if ((this._IsDisabled != value))
-				{
-					this.OnIsDisabledChanging(value);
-					this.SendPropertyChanging();
-					this._IsDisabled = value;
-					this.SendPropertyChanged("IsDisabled");
-					this.OnIsDisabledChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Setup_JobFunction")]
 	public partial class Setup_JobFunction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1930,6 +1407,480 @@ namespace WellNet.ProcessRunner
 					this._IsDisabled = value;
 					this.SendPropertyChanged("IsDisabled");
 					this.OnIsDisabledChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NameValuePair")]
+	public partial class NameValuePair : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Kind;
+		
+		private string _Name;
+		
+		private string _Value;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnKindChanging(string value);
+    partial void OnKindChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnValueChanging(string value);
+    partial void OnValueChanged();
+    #endregion
+		
+		public NameValuePair()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind", DbType="VarChar(50)")]
+		public string Kind
+		{
+			get
+			{
+				return this._Kind;
+			}
+			set
+			{
+				if ((this._Kind != value))
+				{
+					this.OnKindChanging(value);
+					this.SendPropertyChanging();
+					this._Kind = value;
+					this.SendPropertyChanged("Kind");
+					this.OnKindChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Value
+		{
+			get
+			{
+				return this._Value;
+			}
+			set
+			{
+				if ((this._Value != value))
+				{
+					this.OnValueChanging(value);
+					this.SendPropertyChanging();
+					this._Value = value;
+					this.SendPropertyChanged("Value");
+					this.OnValueChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Event_Job")]
+	public partial class Event_Job : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _Setup_JobId;
+		
+		private string _RequestedBy;
+		
+		private System.DateTime _RequestedWhen;
+		
+		private System.Nullable<System.DateTime> _RunWhen;
+		
+		private System.Nullable<int> _Status;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSetup_JobIdChanging(int value);
+    partial void OnSetup_JobIdChanged();
+    partial void OnRequestedByChanging(string value);
+    partial void OnRequestedByChanged();
+    partial void OnRequestedWhenChanging(System.DateTime value);
+    partial void OnRequestedWhenChanged();
+    partial void OnRunWhenChanging(System.Nullable<System.DateTime> value);
+    partial void OnRunWhenChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    #endregion
+		
+		public Event_Job()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Setup_JobId", DbType="Int NOT NULL")]
+		public int Setup_JobId
+		{
+			get
+			{
+				return this._Setup_JobId;
+			}
+			set
+			{
+				if ((this._Setup_JobId != value))
+				{
+					this.OnSetup_JobIdChanging(value);
+					this.SendPropertyChanging();
+					this._Setup_JobId = value;
+					this.SendPropertyChanged("Setup_JobId");
+					this.OnSetup_JobIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestedBy", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string RequestedBy
+		{
+			get
+			{
+				return this._RequestedBy;
+			}
+			set
+			{
+				if ((this._RequestedBy != value))
+				{
+					this.OnRequestedByChanging(value);
+					this.SendPropertyChanging();
+					this._RequestedBy = value;
+					this.SendPropertyChanged("RequestedBy");
+					this.OnRequestedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestedWhen", DbType="DateTime NOT NULL")]
+		public System.DateTime RequestedWhen
+		{
+			get
+			{
+				return this._RequestedWhen;
+			}
+			set
+			{
+				if ((this._RequestedWhen != value))
+				{
+					this.OnRequestedWhenChanging(value);
+					this.SendPropertyChanging();
+					this._RequestedWhen = value;
+					this.SendPropertyChanged("RequestedWhen");
+					this.OnRequestedWhenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RunWhen", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RunWhen
+		{
+			get
+			{
+				return this._RunWhen;
+			}
+			set
+			{
+				if ((this._RunWhen != value))
+				{
+					this.OnRunWhenChanging(value);
+					this.SendPropertyChanging();
+					this._RunWhen = value;
+					this.SendPropertyChanged("RunWhen");
+					this.OnRunWhenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Setup_Job")]
+	public partial class Setup_Job : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private System.Nullable<bool> _IsRetired;
+		
+		private System.Nullable<bool> _IsDisabled;
+		
+		private int _Direction;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnIsRetiredChanging(System.Nullable<bool> value);
+    partial void OnIsRetiredChanged();
+    partial void OnIsDisabledChanging(System.Nullable<bool> value);
+    partial void OnIsDisabledChanged();
+    partial void OnDirectionChanging(int value);
+    partial void OnDirectionChanged();
+    #endregion
+		
+		public Setup_Job()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRetired", DbType="Bit")]
+		public System.Nullable<bool> IsRetired
+		{
+			get
+			{
+				return this._IsRetired;
+			}
+			set
+			{
+				if ((this._IsRetired != value))
+				{
+					this.OnIsRetiredChanging(value);
+					this.SendPropertyChanging();
+					this._IsRetired = value;
+					this.SendPropertyChanged("IsRetired");
+					this.OnIsRetiredChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDisabled", DbType="Bit")]
+		public System.Nullable<bool> IsDisabled
+		{
+			get
+			{
+				return this._IsDisabled;
+			}
+			set
+			{
+				if ((this._IsDisabled != value))
+				{
+					this.OnIsDisabledChanging(value);
+					this.SendPropertyChanging();
+					this._IsDisabled = value;
+					this.SendPropertyChanged("IsDisabled");
+					this.OnIsDisabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direction", DbType="Int NOT NULL")]
+		public int Direction
+		{
+			get
+			{
+				return this._Direction;
+			}
+			set
+			{
+				if ((this._Direction != value))
+				{
+					this.OnDirectionChanging(value);
+					this.SendPropertyChanging();
+					this._Direction = value;
+					this.SendPropertyChanged("Direction");
+					this.OnDirectionChanged();
 				}
 			}
 		}
