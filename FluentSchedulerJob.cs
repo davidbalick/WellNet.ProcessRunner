@@ -23,7 +23,6 @@ namespace WellNet.ProcessRunner
             }
         }
 
-
         public readonly int EventJobId;
         public readonly int SetupJobId;
         public readonly string JobName;

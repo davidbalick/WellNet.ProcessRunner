@@ -4,26 +4,22 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
-using WellNet.Ftp;
 using WellNet.Utils;
 
 namespace WellNet.ProcessRunner
 {
     public static class StaticResources
     {
-        #region Enums
-        #endregion Enums
-
         public static int GetPollWaitMilliseconds()
         {
-            return Convert.ToInt32(GetValueFromNameValuePair("PollWaitSeconds")) * 1000;
+            return Convert.ToInt32(GetValueFromNameValuePair("System", "PollWaitSeconds")) * 1000;
         }
 
-        public static string GetValueFromNameValuePair(string name)
+        public static string GetValueFromNameValuePair(string kind, string name)
         {
             return (new ProcessRunnerDcDataContext())
                 .NameValuePairs
-                .Single(nv => nv.Name == name)
+                .Single(nv => nv.Kind == kind && nv.Name == name)
                 .Value;
         }
 

@@ -5,18 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WellNet.ProcessRunner.Server.WpfUi"
         mc:Ignorable="d"
-        Title="ProcessRunner Server UI" Height="350" Width="525">
+        Title="ProcessRunner UI" Height="350" Width="525" FontSize="16">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Name="BtnStart" Content="Start" Padding="6" Margin="6"/>
-            <Button Name="BtnStop" Content="Stop" Padding="6" Margin="6"/>
-        </StackPanel>
-        <ScrollViewer Grid.Row="1">
-            <TextBlock Name="TbStatus" TextWrapping="Wrap"/>
-        </ScrollViewer>
+        <TabControl Grid.Row="0">
+            <TabItem Name="tabServer" Header="Server">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Start" Command="{Binding StartCommand}" Margin="10" Grid.Column="0"/>
+                    <Button Content="Stop" Command="{Binding StopCommand}" Margin="10" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabKindConfig" Header="Kind Config">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Functions" Grid.Column="0">
+                        <DataGrid ItemsSource="{Binding KindFunctions}"/>
+                    </GroupBox>
+                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
+                    <GroupBox Header="Parameters" Grid.Column="2">
+                        <DataGrid ItemsSource="{Binding KindParameters}"/>
+                    </GroupBox>
+                    <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch" />
+                    <GroupBox Header="Parms in Function" Grid.Column="4">
+                        <DataGrid ItemsSource="{Binding KindFunctionParameters}"/>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabJobConfig" Header="Job Config">
+
+            </TabItem>
+            <TabItem Name="tabJobExecution" Header="Job Execution">
+
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Row="1" Margin="6,0,6,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="LightBlue" BorderThickness="1">
+                <TextBlock TextWrapping="Wrap" Text="{Binding Status}" FontSize="10" Padding="6,0,0,0"/>
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>

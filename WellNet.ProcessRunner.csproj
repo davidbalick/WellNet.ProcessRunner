@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
+    <Compile Include="ProcessRunnerRegistry.cs" />
     <Compile Include="FunctionBase.cs" />
     <Compile Include="Function_Archive.cs" />
     <Compile Include="Function_DeleteFile.cs" />

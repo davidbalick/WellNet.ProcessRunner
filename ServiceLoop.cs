@@ -4,6 +4,7 @@ using System.Threading;
 
 namespace WellNet.ProcessRunner
 {
+    //Not currently used
     public class ServiceLoop
     {
         private int _waitMilliseconds;
