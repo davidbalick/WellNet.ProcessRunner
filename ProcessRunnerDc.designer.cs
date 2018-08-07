@@ -33,15 +33,6 @@ namespace WellNet.ProcessRunner
     partial void InsertSetup_Parameter(Setup_Parameter instance);
     partial void UpdateSetup_Parameter(Setup_Parameter instance);
     partial void DeleteSetup_Parameter(Setup_Parameter instance);
-    partial void InsertKind_Function(Kind_Function instance);
-    partial void UpdateKind_Function(Kind_Function instance);
-    partial void DeleteKind_Function(Kind_Function instance);
-    partial void InsertKind_FunctionParameter(Kind_FunctionParameter instance);
-    partial void UpdateKind_FunctionParameter(Kind_FunctionParameter instance);
-    partial void DeleteKind_FunctionParameter(Kind_FunctionParameter instance);
-    partial void InsertKind_Parameter(Kind_Parameter instance);
-    partial void UpdateKind_Parameter(Kind_Parameter instance);
-    partial void DeleteKind_Parameter(Kind_Parameter instance);
     partial void InsertSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
     partial void UpdateSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
     partial void DeleteSetup_JobFunctionParameter(Setup_JobFunctionParameter instance);
@@ -66,6 +57,15 @@ namespace WellNet.ProcessRunner
     partial void InsertSetup_Job(Setup_Job instance);
     partial void UpdateSetup_Job(Setup_Job instance);
     partial void DeleteSetup_Job(Setup_Job instance);
+    partial void InsertKind_Function(Kind_Function instance);
+    partial void UpdateKind_Function(Kind_Function instance);
+    partial void DeleteKind_Function(Kind_Function instance);
+    partial void InsertKind_Parameter(Kind_Parameter instance);
+    partial void UpdateKind_Parameter(Kind_Parameter instance);
+    partial void DeleteKind_Parameter(Kind_Parameter instance);
+    partial void InsertKind_FunctionParameter(Kind_FunctionParameter instance);
+    partial void UpdateKind_FunctionParameter(Kind_FunctionParameter instance);
+    partial void DeleteKind_FunctionParameter(Kind_FunctionParameter instance);
     #endregion
 		
 		public ProcessRunnerDcDataContext() : 
@@ -103,30 +103,6 @@ namespace WellNet.ProcessRunner
 			get
 			{
 				return this.GetTable<Setup_Parameter>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Kind_Function> Kind_Functions
-		{
-			get
-			{
-				return this.GetTable<Kind_Function>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Kind_FunctionParameter> Kind_FunctionParameters
-		{
-			get
-			{
-				return this.GetTable<Kind_FunctionParameter>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Kind_Parameter> Kind_Parameters
-		{
-			get
-			{
-				return this.GetTable<Kind_Parameter>();
 			}
 		}
 		
@@ -191,6 +167,30 @@ namespace WellNet.ProcessRunner
 			get
 			{
 				return this.GetTable<Setup_Job>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Kind_Function> Kind_Functions
+		{
+			get
+			{
+				return this.GetTable<Kind_Function>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Kind_Parameter> Kind_Parameters
+		{
+			get
+			{
+				return this.GetTable<Kind_Parameter>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Kind_FunctionParameter> Kind_FunctionParameters
+		{
+			get
+			{
+				return this.GetTable<Kind_FunctionParameter>();
 			}
 		}
 		
@@ -311,288 +311,6 @@ namespace WellNet.ProcessRunner
 					this._Value = value;
 					this.SendPropertyChanged("Value");
 					this.OnValueChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_Function")]
-	public partial class Kind_Function : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Kind_Function()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_FunctionParameter")]
-	public partial class Kind_FunctionParameter : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _Kind_FunctionId;
-		
-		private int _Kind_ParameterId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnKind_FunctionIdChanging(int value);
-    partial void OnKind_FunctionIdChanged();
-    partial void OnKind_ParameterIdChanging(int value);
-    partial void OnKind_ParameterIdChanged();
-    #endregion
-		
-		public Kind_FunctionParameter()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind_FunctionId", DbType="Int NOT NULL")]
-		public int Kind_FunctionId
-		{
-			get
-			{
-				return this._Kind_FunctionId;
-			}
-			set
-			{
-				if ((this._Kind_FunctionId != value))
-				{
-					this.OnKind_FunctionIdChanging(value);
-					this.SendPropertyChanging();
-					this._Kind_FunctionId = value;
-					this.SendPropertyChanged("Kind_FunctionId");
-					this.OnKind_FunctionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind_ParameterId", DbType="Int NOT NULL")]
-		public int Kind_ParameterId
-		{
-			get
-			{
-				return this._Kind_ParameterId;
-			}
-			set
-			{
-				if ((this._Kind_ParameterId != value))
-				{
-					this.OnKind_ParameterIdChanging(value);
-					this.SendPropertyChanging();
-					this._Kind_ParameterId = value;
-					this.SendPropertyChanged("Kind_ParameterId");
-					this.OnKind_ParameterIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_Parameter")]
-	public partial class Kind_Parameter : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Kind_Parameter()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
 				}
 			}
 		}
@@ -1881,6 +1599,426 @@ namespace WellNet.ProcessRunner
 					this._Direction = value;
 					this.SendPropertyChanged("Direction");
 					this.OnDirectionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_Function")]
+	public partial class Kind_Function : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private EntitySet<Kind_FunctionParameter> _Kind_FunctionParameters;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Kind_Function()
+		{
+			this._Kind_FunctionParameters = new EntitySet<Kind_FunctionParameter>(new Action<Kind_FunctionParameter>(this.attach_Kind_FunctionParameters), new Action<Kind_FunctionParameter>(this.detach_Kind_FunctionParameters));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kind_Function_Kind_FunctionParameter", Storage="_Kind_FunctionParameters", ThisKey="Id", OtherKey="Kind_FunctionId")]
+		public EntitySet<Kind_FunctionParameter> Kind_FunctionParameters
+		{
+			get
+			{
+				return this._Kind_FunctionParameters;
+			}
+			set
+			{
+				this._Kind_FunctionParameters.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Kind_FunctionParameters(Kind_FunctionParameter entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kind_Function = this;
+		}
+		
+		private void detach_Kind_FunctionParameters(Kind_FunctionParameter entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kind_Function = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_Parameter")]
+	public partial class Kind_Parameter : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private EntitySet<Kind_FunctionParameter> _Kind_FunctionParameters;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Kind_Parameter()
+		{
+			this._Kind_FunctionParameters = new EntitySet<Kind_FunctionParameter>(new Action<Kind_FunctionParameter>(this.attach_Kind_FunctionParameters), new Action<Kind_FunctionParameter>(this.detach_Kind_FunctionParameters));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kind_Parameter_Kind_FunctionParameter", Storage="_Kind_FunctionParameters", ThisKey="Id", OtherKey="Kind_ParameterId")]
+		public EntitySet<Kind_FunctionParameter> Kind_FunctionParameters
+		{
+			get
+			{
+				return this._Kind_FunctionParameters;
+			}
+			set
+			{
+				this._Kind_FunctionParameters.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Kind_FunctionParameters(Kind_FunctionParameter entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kind_Parameter = this;
+		}
+		
+		private void detach_Kind_FunctionParameters(Kind_FunctionParameter entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kind_Parameter = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kind_FunctionParameter")]
+	public partial class Kind_FunctionParameter : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _Kind_FunctionId;
+		
+		private int _Kind_ParameterId;
+		
+		private EntityRef<Kind_Function> _Kind_Function;
+		
+		private EntityRef<Kind_Parameter> _Kind_Parameter;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnKind_FunctionIdChanging(int value);
+    partial void OnKind_FunctionIdChanged();
+    partial void OnKind_ParameterIdChanging(int value);
+    partial void OnKind_ParameterIdChanged();
+    #endregion
+		
+		public Kind_FunctionParameter()
+		{
+			this._Kind_Function = default(EntityRef<Kind_Function>);
+			this._Kind_Parameter = default(EntityRef<Kind_Parameter>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind_FunctionId", DbType="Int NOT NULL")]
+		public int Kind_FunctionId
+		{
+			get
+			{
+				return this._Kind_FunctionId;
+			}
+			set
+			{
+				if ((this._Kind_FunctionId != value))
+				{
+					if (this._Kind_Function.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnKind_FunctionIdChanging(value);
+					this.SendPropertyChanging();
+					this._Kind_FunctionId = value;
+					this.SendPropertyChanged("Kind_FunctionId");
+					this.OnKind_FunctionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kind_ParameterId", DbType="Int NOT NULL")]
+		public int Kind_ParameterId
+		{
+			get
+			{
+				return this._Kind_ParameterId;
+			}
+			set
+			{
+				if ((this._Kind_ParameterId != value))
+				{
+					if (this._Kind_Parameter.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnKind_ParameterIdChanging(value);
+					this.SendPropertyChanging();
+					this._Kind_ParameterId = value;
+					this.SendPropertyChanged("Kind_ParameterId");
+					this.OnKind_ParameterIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kind_Function_Kind_FunctionParameter", Storage="_Kind_Function", ThisKey="Kind_FunctionId", OtherKey="Id", IsForeignKey=true)]
+		public Kind_Function Kind_Function
+		{
+			get
+			{
+				return this._Kind_Function.Entity;
+			}
+			set
+			{
+				Kind_Function previousValue = this._Kind_Function.Entity;
+				if (((previousValue != value) 
+							|| (this._Kind_Function.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kind_Function.Entity = null;
+						previousValue.Kind_FunctionParameters.Remove(this);
+					}
+					this._Kind_Function.Entity = value;
+					if ((value != null))
+					{
+						value.Kind_FunctionParameters.Add(this);
+						this._Kind_FunctionId = value.Id;
+					}
+					else
+					{
+						this._Kind_FunctionId = default(int);
+					}
+					this.SendPropertyChanged("Kind_Function");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kind_Parameter_Kind_FunctionParameter", Storage="_Kind_Parameter", ThisKey="Kind_ParameterId", OtherKey="Id", IsForeignKey=true)]
+		public Kind_Parameter Kind_Parameter
+		{
+			get
+			{
+				return this._Kind_Parameter.Entity;
+			}
+			set
+			{
+				Kind_Parameter previousValue = this._Kind_Parameter.Entity;
+				if (((previousValue != value) 
+							|| (this._Kind_Parameter.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kind_Parameter.Entity = null;
+						previousValue.Kind_FunctionParameters.Remove(this);
+					}
+					this._Kind_Parameter.Entity = value;
+					if ((value != null))
+					{
+						value.Kind_FunctionParameters.Add(this);
+						this._Kind_ParameterId = value.Id;
+					}
+					else
+					{
+						this._Kind_ParameterId = default(int);
+					}
+					this.SendPropertyChanged("Kind_Parameter");
 				}
 			}
 		}

@@ -8,25 +8,6 @@
       <Column Name="Value" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Kind_Function" Member="Kind_Functions">
-    <Type Name="Kind_Function">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kind_FunctionParameter" Member="Kind_FunctionParameters">
-    <Type Name="Kind_FunctionParameter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Kind_FunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Kind_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kind_Parameter" Member="Kind_Parameters">
-    <Type Name="Kind_Parameter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters">
     <Type Name="Setup_JobFunctionParameter">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -98,6 +79,29 @@
       <Column Name="IsRetired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Direction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kind_Function" Member="Kind_Functions">
+    <Type Name="Kind_Function">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Kind_Function_Kind_FunctionParameter" Member="Kind_FunctionParameters" ThisKey="Id" OtherKey="Kind_FunctionId" Type="Kind_FunctionParameter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kind_Parameter" Member="Kind_Parameters">
+    <Type Name="Kind_Parameter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_FunctionParameters" ThisKey="Id" OtherKey="Kind_ParameterId" Type="Kind_FunctionParameter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kind_FunctionParameter" Member="Kind_FunctionParameters">
+    <Type Name="Kind_FunctionParameter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Kind_FunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Kind_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Kind_Function_Kind_FunctionParameter" Member="Kind_Function" ThisKey="Kind_FunctionId" OtherKey="Id" Type="Kind_Function" IsForeignKey="true" />
+      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_Parameter" ThisKey="Kind_ParameterId" OtherKey="Id" Type="Kind_Parameter" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.UpdateEventJobRunWhen" Method="UpdateEventJobRunWhen">
