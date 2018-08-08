@@ -93,8 +93,56 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Name="tabJobConfig" Header="Job Config">
-
+            <TabItem Name="tabSetupConfig" Header="Job Config">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid ItemsSource="{Binding SetupParameters}" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedSetupParameter}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Type" IsReadOnly="False" Binding="{Binding Kind_Parameter.Name}"/>
+                                    <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Name="BtnAddSetupParameter" Content="Add" Grid.Column="0"/>
+                                <Button Name="BtnEditSetupParameter" Content="Edit" Grid.Column="1"/>
+                            </Grid>
+                        </Grid>
+                        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="6,0,6,0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" BorderBrush="LightBlue" BorderThickness="1">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Status}" Padding="6,0,0,0"/>
+                        </Border>
+                        <Button Grid.Column="1" Margin="6,0,3,0" Content="Save" Command="{Binding SaveCommand}"/>
+                        <Button Grid.Column="2" Margin="6,0,3,0" Content="Discard" Command="{Binding DiscardCommand}"/>
+                        <Button Grid.Column="3" Margin="6,0,6,0" Content="Refresh" Command="{Binding RefreshCommand}"/>
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Name="tabJobExecution" Header="Job Execution">
 

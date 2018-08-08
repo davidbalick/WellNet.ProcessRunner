@@ -1,16 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProcessRunner" Class="ProcessRunnerDcDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=desktop-knjja67;Initial Catalog=ProcessRunner;Integrated Security=True" SettingsObjectName="WellNet.ProcessRunner.Properties.Settings" SettingsPropertyName="ProcessRunnerConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters">
-    <Type Name="Setup_JobFunctionParameter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Setup_JobId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Setup_JobFunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Setup_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Setup_Job_Setup_JobFunctionParameter" Member="Setup_Job" ThisKey="Setup_JobId" OtherKey="Id" Type="Setup_Job" IsForeignKey="true" />
-      <Association Name="Setup_Parameter_Setup_JobFunctionParameter" Member="Setup_Parameter" ThisKey="Setup_ParameterId" OtherKey="Id" Type="Setup_Parameter" IsForeignKey="true" />
-      <Association Name="Setup_JobFunction_Setup_JobFunctionParameter" Member="Setup_JobFunction" ThisKey="Setup_JobFunctionId" OtherKey="Id" Type="Setup_JobFunction" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Vendor" Member="Vendors">
     <Type Name="Vendor">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -50,21 +39,13 @@
       <Association Name="Setup_Job_Event_Job" Member="Setup_Job" ThisKey="Setup_JobId" OtherKey="Id" Type="Setup_Job" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Kind_Parameter" Member="Kind_Parameters">
-    <Type Name="Kind_Parameter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_FunctionParameters" ThisKey="Id" OtherKey="Kind_ParameterId" Type="Kind_FunctionParameter" />
-    </Type>
-  </Table>
   <Table Name="dbo.Kind_FunctionParameter" Member="Kind_FunctionParameters">
     <Type Name="Kind_FunctionParameter">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Kind_FunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Kind_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Kind_FunctionParameter_Setup_Parameter" Member="Setup_Parameters" ThisKey="Id" OtherKey="Kind_ParameterId" Type="Setup_Parameter" />
-      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_Parameter" ThisKey="Kind_ParameterId" OtherKey="Id" Type="Kind_Parameter" IsForeignKey="true" />
       <Association Name="Kind_Function_Kind_FunctionParameter" Member="Kind_Function" ThisKey="Kind_FunctionId" OtherKey="Id" Type="Kind_Function" IsForeignKey="true" />
+      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_Parameter" ThisKey="Kind_ParameterId" OtherKey="Id" Type="Kind_Parameter" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Kind_Function" Member="Kind_Functions">
@@ -82,19 +63,9 @@
       <Column Name="IsRetired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsDisabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Direction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Setup_Job_Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters" ThisKey="Id" OtherKey="Setup_JobId" Type="Setup_JobFunctionParameter" />
       <Association Name="Setup_Job_Event_Job" Member="Event_Jobs" ThisKey="Id" OtherKey="Setup_JobId" Type="Event_Job" />
       <Association Name="Setup_Job_Setup_JobFunction" Member="Setup_JobFunctions" ThisKey="Id" OtherKey="Setup_JobId" Type="Setup_JobFunction" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Setup_Parameter" Member="Setup_Parameters">
-    <Type Name="Setup_Parameter">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Kind_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Value" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
-      <Association Name="Setup_Parameter_Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters" ThisKey="Id" OtherKey="Setup_ParameterId" Type="Setup_JobFunctionParameter" />
-      <Association Name="Kind_FunctionParameter_Setup_Parameter" Member="Kind_FunctionParameter" ThisKey="Kind_ParameterId" OtherKey="Id" Type="Kind_FunctionParameter" IsForeignKey="true" />
+      <Association Name="Setup_Job_Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters" ThisKey="Id" OtherKey="Setup_JobId" Type="Setup_JobFunctionParameter" />
     </Type>
   </Table>
   <Table Name="dbo.Setup_JobFunction" Member="Setup_JobFunctions">
@@ -118,6 +89,35 @@
       <Column Name="Context" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
       <Column Name="Message" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
       <Association Name="Event_Job_Event_Message" Member="Event_Job" ThisKey="Event_JobId" OtherKey="Id" Type="Event_Job" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kind_Parameter" Member="Kind_Parameters">
+    <Type Name="Kind_Parameter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Kind_Parameter_Kind_FunctionParameter" Member="Kind_FunctionParameters" ThisKey="Id" OtherKey="Kind_ParameterId" Type="Kind_FunctionParameter" />
+      <Association Name="Kind_Parameter_Setup_Parameter" Member="Setup_Parameters" ThisKey="Id" OtherKey="Kind_ParameterId" Type="Setup_Parameter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Setup_Parameter" Member="Setup_Parameters">
+    <Type Name="Setup_Parameter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Kind_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Association Name="Setup_Parameter_Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters" ThisKey="Id" OtherKey="Setup_ParameterId" Type="Setup_JobFunctionParameter" />
+      <Association Name="Kind_Parameter_Setup_Parameter" Member="Kind_Parameter" ThisKey="Kind_ParameterId" OtherKey="Id" Type="Kind_Parameter" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Setup_JobFunctionParameter" Member="Setup_JobFunctionParameters">
+    <Type Name="Setup_JobFunctionParameter">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Setup_JobId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Setup_JobFunctionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Setup_ParameterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Setup_Job_Setup_JobFunctionParameter" Member="Setup_Job" ThisKey="Setup_JobId" OtherKey="Id" Type="Setup_Job" IsForeignKey="true" />
+      <Association Name="Setup_JobFunction_Setup_JobFunctionParameter" Member="Setup_JobFunction" ThisKey="Setup_JobFunctionId" OtherKey="Id" Type="Setup_JobFunction" IsForeignKey="true" />
+      <Association Name="Setup_Parameter_Setup_JobFunctionParameter" Member="Setup_Parameter" ThisKey="Setup_ParameterId" OtherKey="Id" Type="Setup_Parameter" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.UpdateEventJobRunWhen" Method="UpdateEventJobRunWhen">
